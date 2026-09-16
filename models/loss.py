@@ -311,7 +311,8 @@ class InfernoMapper(nn.Module):
         self.register_buffer("w_rgb", W[:3])
         self.b = float(W[3])
 
-    @torch.no_grad()
+    with torch.no_grad():
+          T_gt = mapper(gt)
     def forward(self, img_rgb):
         """
         img_rgb: [B,3,H,W] in [0,1] — Inferno-mapped RGB thermal image
